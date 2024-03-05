@@ -1,6 +1,16 @@
-const TalkPoint = () => {
-    return(
-        <h2>talkpoint</h2>
-    )
+import React from 'react'
+import './talkpoint.css'
+
+const TalkPoint = ({ title, description, url, urlToImage}) => {
+  return (
+    <div className='news-app'>
+      <div className='news-item'>
+        <img className='news-img' src={urlToImage} alt={title} />
+        <h3><a href={url}>{title}</a></h3>
+        <p>{description}</p>
+      </div>
+    </div>
+  )
 }
-export default TalkPoint;
+
+export default TalkPoint

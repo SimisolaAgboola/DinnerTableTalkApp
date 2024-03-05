@@ -1,12 +1,12 @@
-import './App.css';
+import React from 'react'
+import TalkPointList from './components/TalkPointList'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <h1>Welcome to dinner table talk!</h1>
-      <h4>Never run out of things to say when meeting with friends, family or colleagues!</h4>
+    <div className='App'>
+      <TalkPointList />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
