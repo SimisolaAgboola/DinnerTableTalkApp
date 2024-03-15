@@ -6,23 +6,28 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const TalkPointList = () => {
-    const [articles, setArticles] = useState([])
+    const [sportsArticles, setSportsArticles] = useState([]);
+    const [politicsArticles, setPoliticsArticles] = useState([]);
+    const [entertainmentArticles, setEntertainmentArticles] = useState([]);
 
     useEffect(() => {
-        const getArticles = async () => {
+        const getArticles = async (category, setArticles) => {
             //const response = await axios.get('https://newsapi.org/v2/everything?q=sports&apiKey=88eb9075015140278498bc7d74079dda')
             const response = await axios.get('https://newsapi.org/v2/everything', {
                     params: {
-                        q: 'sports',
+                        q: category,
                         apiKey: `${process.env.REACT_APP_API_KEY}`,
                         pageSize: 5  // Limit the number of articles to 5
                     }
                 });
             setArticles(response.data.articles)
         }
-        getArticles()
+        getArticles('sports', setSportsArticles);
+        getArticles('politics', setPoliticsArticles);
+        getArticles('entertainment', setEntertainmentArticles);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, []);
+
     const settings = {
         dots: true,
         infinite: true,
@@ -35,8 +40,35 @@ const TalkPointList = () => {
         <div>
             <h1>Dinner Table Talk</h1>
             <h2>Never run out of things to say with family and colleagues</h2>
+            <h3>Sports</h3>
             <Slider {...settings}>
-                {articles.map((article, index) => (
+                {sportsArticles.map((article, index) => (
+                    <div key={index}>
+                        <TalkPoint
+                            title={article.title}
+                            description={article.description}
+                            url={article.url}
+                            urlToImage={article.urlToImage}
+                        />
+                    </div>
+                ))}
+            </Slider>
+            <h3>Politics</h3>
+            <Slider {...settings}>
+                {politicsArticles.map((article, index) => (
+                    <div key={index}>
+                        <TalkPoint
+                            title={article.title}
+                            description={article.description}
+                            url={article.url}
+                            urlToImage={article.urlToImage}
+                        />
+                    </div>
+                ))}
+            </Slider>
+            <h3>Entertainment</h3>
+            <Slider {...settings}>
+                {entertainmentArticles.map((article, index) => (
                     <div key={index}>
                         <TalkPoint
                             title={article.title}
