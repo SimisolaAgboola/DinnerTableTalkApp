@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const TalkPointList = () => {
+    const [selectedCategory, setSelectedCategory] = useState('sports');
     const [sportsArticles, setSportsArticles] = useState([]);
     const [politicsArticles, setPoliticsArticles] = useState([]);
     const [entertainmentArticles, setEntertainmentArticles] = useState([]);
@@ -32,53 +33,62 @@ const TalkPointList = () => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 3,
+        slidesToShow: 1,
         slidesToScroll: 1
     };
 
     return (
-        <div>
+        <div className="container">
             <h1>Dinner Table Talk</h1>
             <h2>Never run out of things to say with family and colleagues</h2>
-            <h3>Sports</h3>
-            <Slider {...settings}>
-                {sportsArticles.map((article, index) => (
-                    <div key={index}>
-                        <TalkPoint
-                            title={article.title}
-                            description={article.description}
-                            url={article.url}
-                            urlToImage={article.urlToImage}
-                        />
-                    </div>
-                ))}
-            </Slider>
-            <h3>Politics</h3>
-            <Slider {...settings}>
-                {politicsArticles.map((article, index) => (
-                    <div key={index}>
-                        <TalkPoint
-                            title={article.title}
-                            description={article.description}
-                            url={article.url}
-                            urlToImage={article.urlToImage}
-                        />
-                    </div>
-                ))}
-            </Slider>
-            <h3>Entertainment</h3>
-            <Slider {...settings}>
-                {entertainmentArticles.map((article, index) => (
-                    <div key={index}>
-                        <TalkPoint
-                            title={article.title}
-                            description={article.description}
-                            url={article.url}
-                            urlToImage={article.urlToImage}
-                        />
-                    </div>
-                ))}
-            </Slider>
+            <div className="button-container">
+                <button className="button" onClick={() => setSelectedCategory('sports')}>Sports</button>
+                <button className="button" onClick={() => setSelectedCategory('politics')}>Politics</button>
+                <button className="button" onClick={() => setSelectedCategory('entertainment')}>Entertainment</button>
+            </div>
+            
+            {selectedCategory === 'sports' && (
+                <Slider {...settings}>
+                    {sportsArticles.map((article, index) => (
+                        <div key={index}>
+                            <TalkPoint
+                                title={article.title}
+                                description={article.description}
+                                url={article.url}
+                                urlToImage={article.urlToImage}
+                            />
+                        </div>
+                    ))}
+                </Slider>
+            )}
+            {selectedCategory === 'politics' && (
+                <Slider {...settings}>
+                    {politicsArticles.map((article, index) => (
+                        <div key={index}>
+                            <TalkPoint
+                                title={article.title}
+                                description={article.description}
+                                url={article.url}
+                                urlToImage={article.urlToImage}
+                            />
+                        </div>
+                    ))}
+                </Slider>
+            )}
+            {selectedCategory === 'entertainment' && (
+                <Slider {...settings}>
+                    {entertainmentArticles.map((article, index) => (
+                        <div key={index}>
+                            <TalkPoint
+                                title={article.title}
+                                description={article.description}
+                                url={article.url}
+                                urlToImage={article.urlToImage}
+                            />
+                        </div>
+                    ))}
+                </Slider>
+            )}
         </div>
     );
 };
